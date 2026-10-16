@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Klinik Utama Amara - Perawatan Modern, Hati yang Tenang</title>
+  <title>Klinik Pramata Nani Medika - Perawatan Modern, Hati yang Tenang</title>
 
   <!-- ==========================================================
        PENGATURAN KLINIK  -  CUKUP UBAH BAGIAN INI SAJA
@@ -14,21 +14,21 @@
 
       /* ================= IDENTITAS ================= */
       // Kata pertama tampil hitam, sisanya hijau (navbar & footer).
-      NAMA_KLINIK: "Klinik Utama Amara",
+      NAMA_KLINIK: "Klinik Pramata Nani Medika",
       // Foto besar di atas. Nama file (satu folder dengan file HTML ini) atau link gambar.
-      FOTO_HERO: "watermarked_img_6602453060621144527.jpg",
+      FOTO_HERO: "watermarked_img_17200273929259396407.jpg",
 
       /* ================= WHATSAPP & KONTAK ================= */
       // Boleh ditulis 0877xxxx atau 62877xxxx, otomatis dirapikan.
-      WA_NOMOR: "0853-1914-5721",
+      WA_NOMOR: "6287794418330",
       // WA khusus janji temu. Kosongkan ("") jika sama dengan WA_NOMOR.
       WA_JANJI: "",
-      TELEPON_1: "0853-1914-5721",
-      ALAMAT:"Jl. Raya Tajur No.105, RT.01/RW.05, Pakuan, Kec. Bogor Sel., Kota Bogor, Jawa Barat 16134",
+      TELEPON_1: "0877-9441-8330",
+      ALAMAT: "Jl. Sosial No. 18, RT 002/RW 006, Jatiwaringin, Kec. Pondok Gede, Kota Bekasi, Jawa Barat 17411",
 
       /* ================= GOOGLE MAPS ================= */
       // Isi alamat / nama klinik / koordinat, peta otomatis menyesuaikan.
-      MAPS_CARI: "Jl. Raya Tajur No.105, RT.01/RW.05, Pakuan, Kec. Bogor Sel., Kota Bogor, Jawa Barat 16134",
+      MAPS_CARI: "Klinik Pratama Nani Medika, Jl. Sosial No.18, Jatiwaringin, Pondok Gede, Bekasi",
       // Opsional: isi src="..." dari Google Maps > Bagikan > Sematkan peta. Kosongkan jika tidak dipakai.
       MAPS_EMBED: "",
 
@@ -234,42 +234,10 @@
         <li><a href="#kontak" class="hover:text-brand-600 transition-colors">Kontak</a></li>
       </ul>
 
-     <a id="btnJanji" href="#" class="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 shadow-lg transition-all">
-        Buat Janji Temu
+      <a href="#janji"
+         class="hidden md:inline-flex bg-slate-900 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-slate-900/10">
+        Buat Janji
       </a>
-    </main>
-  </div>
-
-    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/90 backdrop-blur-xl">
-      <ul class="wrap py-4 space-y-1 text-sm font-medium">
-        <li><a href="#layanan" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Layanan</a></li>
-        <li><a href="#jadwal" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Jadwal</a></li>
-        <li><a href="#testimoni" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Testimoni</a></li>
-        <li><a href="#faq" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">FAQ</a></li>
-        <li><a href="#kontak" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Kontak</a></li>
-        <li class="pt-2">
-          <a href="#janji" class="block text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-full">Buat Janji</a>
-        </li>
-      </ul>
-    </div>
-   <script>
-  const btnJanji = document.getElementById('btnJanji');
-  const heroSection = document.getElementById('heroSection');
-  const formSection = document.getElementById('formSection');
-
-  btnJanji.addEventListener('click', function(event) {
-    event.preventDefault(); // Mencegah link melompat
-
-    // 1. Sembunyikan halaman utama
-    heroSection.classList.add('hidden');
-
-    // 2. Munculkan halaman formulir
-    formSection.classList.remove('hidden');
-
-    // 3. Otomatis bawa layar ke paling atas agar terasa seperti halaman baru
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-</script>
 
       <!-- Hamburger -->
       <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu" aria-expanded="false">
