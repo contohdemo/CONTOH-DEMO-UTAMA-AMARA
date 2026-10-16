@@ -234,10 +234,42 @@
         <li><a href="#kontak" class="hover:text-brand-600 transition-colors">Kontak</a></li>
       </ul>
 
-      <a href="#janji"
-         class="hidden md:inline-flex bg-slate-900 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-slate-900/10">
-        Buat Janji
+     <a id="btnJanji" href="#" class="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 shadow-lg transition-all">
+        Buat Janji Temu
       </a>
+    </main>
+  </div>
+
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white/90 backdrop-blur-xl">
+      <ul class="wrap py-4 space-y-1 text-sm font-medium">
+        <li><a href="#layanan" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Layanan</a></li>
+        <li><a href="#jadwal" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Jadwal</a></li>
+        <li><a href="#testimoni" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Testimoni</a></li>
+        <li><a href="#faq" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">FAQ</a></li>
+        <li><a href="#kontak" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Kontak</a></li>
+        <li class="pt-2">
+          <a href="#janji" class="block text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-full">Buat Janji</a>
+        </li>
+      </ul>
+    </div>
+   <script>
+  const btnJanji = document.getElementById('btnJanji');
+  const heroSection = document.getElementById('heroSection');
+  const formSection = document.getElementById('formSection');
+
+  btnJanji.addEventListener('click', function(event) {
+    event.preventDefault(); // Mencegah link melompat
+
+    // 1. Sembunyikan halaman utama
+    heroSection.classList.add('hidden');
+
+    // 2. Munculkan halaman formulir
+    formSection.classList.remove('hidden');
+
+    // 3. Otomatis bawa layar ke paling atas agar terasa seperti halaman baru
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 
       <!-- Hamburger -->
       <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu" aria-expanded="false">
