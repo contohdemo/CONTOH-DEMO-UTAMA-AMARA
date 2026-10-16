@@ -170,10 +170,16 @@
   <style>
     html { scroll-behavior: smooth; }
     summary::-webkit-details-marker { display: none; }
+    body.modal-open { overflow: hidden; }
     @keyframes floaty {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
+    @keyframes munculModal {
+      from { opacity: 0; transform: translateY(24px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-panel { animation: munculModal .28s ease-out; }
     .floaty { animation: floaty 4s ease-in-out infinite; }
     .floaty-delay { animation: floaty 5s ease-in-out infinite; animation-delay: 1.2s; }
     .text-gradient {
@@ -234,10 +240,10 @@
         <li><a href="#kontak" class="hover:text-brand-600 transition-colors">Kontak</a></li>
       </ul>
 
-      <a href="#janji"
+      <button type="button" data-buka-janji
          class="hidden md:inline-flex bg-slate-900 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-slate-900/10">
         Buat Janji
-      </a>
+      </button>
 
       <!-- Hamburger -->
       <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu" aria-expanded="false">
@@ -255,7 +261,7 @@
         <li><a href="#faq" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">FAQ</a></li>
         <li><a href="#kontak" class="block px-3 py-2.5 rounded-lg hover:bg-brand-50">Kontak</a></li>
         <li class="pt-2">
-          <a href="#janji" class="block text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-full">Buat Janji</a>
+          <button type="button" data-buka-janji class="block w-full text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-full">Buat Janji</button>
         </li>
       </ul>
     </div>
@@ -283,11 +289,11 @@
           </p>
 
           <div class="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3">
-            <a href="#janji"
+            <button type="button" data-buka-janji
                class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-cyan-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-brand-600/30 hover:shadow-xl hover:shadow-brand-600/40 hover:-translate-y-0.5 transition-all duration-300">
               Buat Janji
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            </button>
             <a href="#jadwal"
                class="inline-flex items-center justify-center bg-white text-slate-700 font-semibold px-7 py-3.5 rounded-full border border-slate-200 shadow-sm hover:border-brand-300 hover:text-brand-700 hover:-translate-y-0.5 transition-all duration-300">
               Jadwal Dokter
@@ -402,125 +408,22 @@
       </div>
     </section>
 
-    <!-- ================= FORM JANJI TEMU ================= -->
-    <section id="janji" class="section bg-gradient-to-b from-brand-50 to-slate-50">
-      <div class="wrap grid lg:grid-cols-5 gap-8 lg:gap-14 items-start">
-
-        <!-- Penjelasan -->
-        <div class="lg:col-span-2" data-aos="fade-up">
-          <p class="eyebrow">Janji Temu</p>
-          <h2 class="title">Atur kunjungan Anda, tanpa antre lama</h2>
-          <p class="lead">Isi form singkat ini, lalu konfirmasi lewat WhatsApp. Admin kami akan memastikan jadwal Anda.</p>
-
-          <ol class="mt-6 lg:mt-8 grid grid-cols-3 gap-3 lg:grid-cols-1 lg:gap-5">
-            <li class="flex flex-col items-center text-center gap-2 lg:flex-row lg:items-start lg:text-left lg:gap-4">
-              <span class="shrink-0 w-9 h-9 rounded-full bg-brand-600 text-white text-sm font-bold flex items-center justify-center">1</span>
-              <div>
-                <p class="font-semibold text-slate-900 text-sm lg:text-base"><span class="lg:hidden">Isi data</span><span class="hidden lg:inline">Isi data dan pilih jadwal</span></p>
-                <p class="hidden lg:block text-sm text-slate-500">Pilih layanan, dokter, tanggal, dan jam yang tersedia.</p>
-              </div>
-            </li>
-            <li class="flex flex-col items-center text-center gap-2 lg:flex-row lg:items-start lg:text-left lg:gap-4">
-              <span class="shrink-0 w-9 h-9 rounded-full bg-brand-600 text-white text-sm font-bold flex items-center justify-center">2</span>
-              <div>
-                <p class="font-semibold text-slate-900 text-sm lg:text-base"><span class="lg:hidden">Kirim ke WA</span><span class="hidden lg:inline">Konfirmasi via WhatsApp</span></p>
-                <p class="hidden lg:block text-sm text-slate-500">Pesan sudah terisi otomatis, tinggal kirim ke admin.</p>
-              </div>
-            </li>
-            <li class="flex flex-col items-center text-center gap-2 lg:flex-row lg:items-start lg:text-left lg:gap-4">
-              <span class="shrink-0 w-9 h-9 rounded-full bg-brand-600 text-white text-sm font-bold flex items-center justify-center">3</span>
-              <div>
-                <p class="font-semibold text-slate-900 text-sm lg:text-base"><span class="lg:hidden">Datang</span><span class="hidden lg:inline">Datang sesuai jadwal</span></p>
-                <p class="hidden lg:block text-sm text-slate-500">Bawa KTP dan kartu asuransi bila ada.</p>
-              </div>
-            </li>
-          </ol>
-
-          <p class="mt-6 lg:mt-8 text-sm text-slate-500 text-center lg:text-left">Lebih suka langsung chat?
-            <a href="#" data-wa="janji" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-600 hover:underline">Hubungi admin</a>
-          </p>
-        </div>
-
-        <!-- Form -->
-        <div class="lg:col-span-3" data-aos="fade-up" data-aos-delay="100">
-          <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-5 sm:p-8">
-
-            <form id="formJanji" novalidate class="grid grid-cols-2 gap-3 sm:gap-4">
-              <!-- honeypot anti-spam (jangan diisi) -->
-              <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
-
-              <div class="col-span-2 sm:col-span-1">
-                <label for="fNama" class="label">Nama lengkap</label>
-                <input id="fNama" name="nama" type="text" autocomplete="name" placeholder="Nama pasien" class="field">
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label for="fHp" class="label">Nomor WhatsApp</label>
-                <input id="fHp" name="hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx" class="field">
-              </div>
-
-              <div class="col-span-2 sm:col-span-1">
-                <label for="fLayanan" class="label">Layanan</label>
-                <select id="fLayanan" name="layanan" class="field">
-                  <option value="">Pilih layanan</option>
-                  <option>Poli Umum</option>
-                  <option>Poli Gigi</option>
-                  <option>KIA (Ibu &amp; Anak)</option>
-                  <option>Laboratorium</option>
-                </select>
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label for="fDokter" class="label">Dokter</label>
-                <select id="fDokter" name="dokter" class="field">
-                  <option value="any">Dokter yang tersedia</option>
-                </select>
-              </div>
-
-              <div class="col-span-1">
-                <label for="fTanggal" class="label">Tanggal</label>
-                <input id="fTanggal" name="tanggal" type="date" class="field">
-              </div>
-              <div class="col-span-1">
-                <label for="fJam" class="label">Jam</label>
-                <select id="fJam" name="jam" class="field">
-                  <option value="">Pilih tanggal dulu</option>
-                </select>
-              </div>
-
-              <p id="slotHint" class="col-span-2 -mt-1 text-xs text-slate-500"></p>
-
-              <div class="col-span-2">
-                <label for="fKeluhan" class="label">Keluhan <span class="text-slate-400 font-normal">(opsional)</span></label>
-                <textarea id="fKeluhan" name="keluhan" rows="2" placeholder="Ceritakan singkat keluhan Anda" class="field resize-none"></textarea>
-              </div>
-
-              <p id="formError" class="col-span-2 text-sm font-medium text-red-600" role="alert"></p>
-
-              <div class="col-span-2">
-                <button id="btnKirim" type="submit"
-                        class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-cyan-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-brand-600/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:pointer-events-none">
-                  Kirim Janji Temu
-                </button>
-                <p class="mt-3 text-xs text-center text-slate-400">Data Anda hanya digunakan untuk keperluan janji temu.</p>
-              </div>
-            </form>
-
-            <!-- Tampilan setelah berhasil -->
-            <div id="formSukses" class="hidden text-center">
-              <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 text-brand-600 flex items-center justify-center">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <h3 class="mt-5 text-xl font-bold text-slate-900">Janji temu Anda sudah dicatat</h3>
-              <p class="mt-2 text-sm text-slate-500">Satu langkah lagi: kirim konfirmasi ke admin lewat WhatsApp.</p>
-
-              <ul id="ringkasan" class="mt-6 text-sm text-left space-y-2 bg-slate-50 rounded-2xl p-5"></ul>
-
-              <a id="btnWa" href="#" target="_blank" rel="noopener noreferrer"
-                 class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
-                Konfirmasi via WhatsApp
-              </a>
-              <button id="btnUlang" type="button" class="mt-4 text-sm font-medium text-slate-500 hover:text-brand-600">Buat janji lain</button>
+    <!-- ================= AJAKAN JANJI TEMU (ringkas; form ada di popup) ================= -->
+    <section id="janji" class="py-10 md:py-16 scroll-mt-16 bg-gradient-to-b from-brand-50 to-slate-50">
+      <div class="wrap">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-cyan-600 px-6 py-8 sm:px-10 sm:py-10 text-center md:text-left shadow-xl shadow-brand-600/20" data-aos="fade-up">
+          <div class="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-white/10"></div>
+          <div class="absolute -bottom-20 -left-10 w-48 h-48 rounded-full bg-white/10"></div>
+          <div class="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div class="max-w-xl">
+              <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Mau berkunjung tanpa antre lama?</h2>
+              <p class="mt-2 text-brand-50/90">Buat janji temu dalam hitungan detik, lalu konfirmasi lewat WhatsApp.</p>
             </div>
-
+            <button type="button" data-buka-janji
+               class="shrink-0 inline-flex items-center justify-center gap-2 bg-white text-brand-700 font-semibold px-7 py-3.5 rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300">
+              Buat Janji Temu
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -610,6 +513,109 @@
     </div>
   </footer>
 
+  <!-- ================= POPUP JANJI TEMU ================= -->
+  <div id="modalJanji" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-labelledby="judulJanji">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div data-tutup class="absolute inset-0 overflow-y-auto overscroll-contain">
+      <div data-tutup class="min-h-full flex items-end sm:items-center justify-center sm:p-6">
+        <div class="modal-panel relative w-full max-w-xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 sm:p-8">
+
+          <button type="button" data-tutup aria-label="Tutup"
+                  class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+
+          <!-- Form -->
+          <div id="bagianForm">
+            <p class="eyebrow">Janji Temu</p>
+            <h2 id="judulJanji" class="mt-1 text-xl sm:text-2xl font-bold text-slate-900 tracking-tight pr-10">Atur kunjungan Anda</h2>
+            <p class="mt-1.5 text-sm text-slate-500">Isi data singkat ini, lalu konfirmasi lewat WhatsApp. Admin kami akan memastikan jadwal Anda.</p>
+
+            <form id="formJanji" novalidate class="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+              <!-- honeypot anti-spam (jangan diisi) -->
+              <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+
+              <div class="col-span-2 sm:col-span-1">
+                <label for="fNama" class="label">Nama lengkap</label>
+                <input id="fNama" name="nama" type="text" autocomplete="name" placeholder="Nama pasien" class="field">
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label for="fHp" class="label">Nomor WhatsApp</label>
+                <input id="fHp" name="hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xxxxxxxxxx" class="field">
+              </div>
+
+              <div class="col-span-2 sm:col-span-1">
+                <label for="fLayanan" class="label">Layanan</label>
+                <select id="fLayanan" name="layanan" class="field">
+                  <option value="">Pilih layanan</option>
+                  <option>Poli Umum</option>
+                  <option>Poli Gigi</option>
+                  <option>KIA (Ibu &amp; Anak)</option>
+                  <option>Laboratorium</option>
+                </select>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label for="fDokter" class="label">Dokter</label>
+                <select id="fDokter" name="dokter" class="field">
+                  <option value="any">Dokter yang tersedia</option>
+                </select>
+              </div>
+
+              <div class="col-span-1">
+                <label for="fTanggal" class="label">Tanggal</label>
+                <input id="fTanggal" name="tanggal" type="date" class="field">
+              </div>
+              <div class="col-span-1">
+                <label for="fJam" class="label">Jam</label>
+                <select id="fJam" name="jam" class="field">
+                  <option value="">Pilih tanggal dulu</option>
+                </select>
+              </div>
+
+              <p id="slotHint" class="col-span-2 -mt-1 text-xs text-slate-500"></p>
+
+              <div class="col-span-2">
+                <label for="fKeluhan" class="label">Keluhan <span class="text-slate-400 font-normal">(opsional)</span></label>
+                <textarea id="fKeluhan" name="keluhan" rows="2" placeholder="Ceritakan singkat keluhan Anda" class="field resize-none"></textarea>
+              </div>
+
+              <p id="formError" class="col-span-2 text-sm font-medium text-red-600" role="alert"></p>
+
+              <div class="col-span-2">
+                <button id="btnKirim" type="submit"
+                        class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-cyan-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg shadow-brand-600/30 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:pointer-events-none">
+                  Kirim Janji Temu
+                </button>
+                <p class="mt-3 text-xs text-center text-slate-400">Data Anda hanya digunakan untuk keperluan janji temu. Bawa KTP dan kartu asuransi bila ada.</p>
+                <p class="mt-2 text-xs text-center text-slate-500">Lebih suka langsung chat?
+                  <a href="#" data-wa="janji" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-600 hover:underline">Hubungi admin</a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tampilan setelah berhasil -->
+          <div id="formSukses" class="hidden text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 text-brand-600 flex items-center justify-center">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="mt-5 text-xl font-bold text-slate-900">Janji temu Anda sudah dicatat</h3>
+            <p class="mt-2 text-sm text-slate-500">Satu langkah lagi: kirim konfirmasi ke admin lewat WhatsApp.</p>
+
+            <ul id="ringkasan" class="mt-6 text-sm text-left space-y-2 bg-slate-50 rounded-2xl p-5"></ul>
+
+            <a id="btnWa" href="#" target="_blank" rel="noopener noreferrer"
+               class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-7 py-3.5 rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+              Konfirmasi via WhatsApp
+            </a>
+            <button id="btnUlang" type="button" class="mt-4 text-sm font-medium text-slate-500 hover:text-brand-600">Buat janji lain</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= FLOATING WHATSAPP ================= -->
   <a href="#" data-wa="bantuan"
      target="_blank" rel="noopener noreferrer" aria-label="Chat via WhatsApp"
@@ -645,7 +651,7 @@
       btn.setAttribute('aria-expanded', shouldOpen);
     }
     btn.addEventListener('click', () => toggleMenu());
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(true)));
+    menu.querySelectorAll('a, button[data-buka-janji]').forEach(a => a.addEventListener('click', () => toggleMenu(true)));
 
     // ---- Terapkan pengaturan dari blok KLINIK di atas ----
     (function () {
@@ -963,6 +969,29 @@
       }
       coba("status", () => { updateStatus(); setInterval(updateStatus, 60000); });
 
+      /* ---------- POPUP JANJI TEMU (buka / tutup) ---------- */
+      const modal = document.getElementById("modalJanji");
+      const bagianForm = document.getElementById("bagianForm");
+      let pemicu = null;
+
+      function bukaModal(sumber) {
+        pemicu = sumber || null;
+        modal.classList.remove("hidden");
+        document.body.classList.add("modal-open");
+        const pertama = f.classList.contains("hidden") || bagianForm.classList.contains("hidden") ? null : el.nama;
+        if (pertama) setTimeout(() => pertama.focus({ preventScroll: true }), 120);
+      }
+      function tutupModal() {
+        modal.classList.add("hidden");
+        document.body.classList.remove("modal-open");
+        if (pemicu && pemicu.focus) pemicu.focus({ preventScroll: true });
+      }
+
+      document.querySelectorAll("[data-buka-janji]").forEach(b =>
+        b.addEventListener("click", e => { e.preventDefault(); bukaModal(b); }));
+      modal.addEventListener("click", e => { if (e.target.closest("button[data-tutup]") || e.target.hasAttribute("data-tutup")) tutupModal(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.classList.contains("hidden")) tutupModal(); });
+
       /* ---------- FORM JANJI TEMU ---------- */
       const f = document.getElementById("formJanji");
       const el = f.elements;
@@ -1110,7 +1139,7 @@
             li.append(a, b); ring.append(li);
           });
 
-          f.classList.add("hidden");
+          bagianForm.classList.add("hidden");
           sukses.classList.remove("hidden");
         } catch (err) {
           console.error(err);
@@ -1125,7 +1154,8 @@
         f.reset();
         refreshSlots();
         sukses.classList.add("hidden");
-        f.classList.remove("hidden");
+        bagianForm.classList.remove("hidden");
+        el.nama.focus({ preventScroll: true });
       });
     })();
   </script>
